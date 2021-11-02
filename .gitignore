@@ -3,6 +3,11 @@
 # =============== #
 Temp/
 Library/
+.vs
+.vsconfig
+Logs/
+Logs/*.txt
+Logs/*.log
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
