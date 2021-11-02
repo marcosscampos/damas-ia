@@ -136,15 +136,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b65012e51c5aea4aad7ef2ee3e89fa6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b65012e51c5aea4aad7ef2ee3e89fa6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b65012e51c5aea4aad7ef2ee3e89fa6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b65012e51c5aea4aad7ef2ee3e89fa6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -271,7 +271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0.04, y: 2.42, z: 0.06000042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -319,14 +319,14 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 2
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -354,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0.08, y: 5, z: -15.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -373,15 +373,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.57999986
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.06000042
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -441,4 +441,3 @@ MonoBehaviour:
   whitePiece: {fileID: 3189503284419363328, guid: 9c3ab830e32d56d439e24b81f8ffd262, type: 3}
   blackPiece: {fileID: 8010333676587047475, guid: 9dcd74e6dd79ba5448183a48ecd676f0, type: 3}
   boardOffset: {x: -4, y: 4, z: 0}
-  pieceOffset: {x: 0.5, y: 0, z: 0.5}
