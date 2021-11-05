@@ -1012,7 +1012,7 @@ Camera:
     height: 1
   near clip plane: 2
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1037,13 +1037,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.61987394, y: -0, z: -0, w: 0.78470147}
-  m_LocalPosition: {x: 0.08, y: 8.88, z: -2.68}
+  m_LocalRotation: {x: 0, y: 0.7933534, z: -0.60876137, w: 0}
+  m_LocalPosition: {x: 0.08, y: 8.63, z: 3.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 76.614, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 180, z: 0}
 --- !u!1001 &1121175047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1440,7 +1440,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0303b610676309247ad9e2321365b433, type: 2}
+      objectReference: {fileID: 2100000, guid: 289154967d826f54584ee324f9b6929e, type: 2}
     - target: {fileID: 919132149155446097, guid: c3440af910f374f48832e99a74d9e34b, type: 3}
       propertyPath: m_Name
       value: Board
