@@ -23,6 +23,7 @@ obj/
 *.user
 *.unityproj
 *.booproj
+bin/
 
 # ============ #
 # OS generated #

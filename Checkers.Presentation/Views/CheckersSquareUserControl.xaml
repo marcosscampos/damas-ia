@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Checkers.Presentation.Views.CheckersSquareUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Checkers.Presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="75" d:DesignWidth="75">
+    <Grid x:Name="button1" Width="75" Height="75" Background="Transparent">
+        <Image x:Name="checkerImage" ></Image>
+        <Button x:Name="button" Background="Transparent" Template="{DynamicResource CheckerButtonTemplate}"></Button>
+    </Grid>
+</UserControl>
