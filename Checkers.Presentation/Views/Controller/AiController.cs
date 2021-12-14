@@ -18,7 +18,7 @@ namespace Checkers.Presentation.Views.Controller
 
         public static bool IsThinking() => thinking;
 
-        public static CheckersMove MinimaxStart(CheckerBoard board)
+        public static CheckersMove MinimaxStart(CheckerBoard board, int depth, string difficulty)
         {
             int alpha = int.MinValue;
             int beta = int.MaxValue;
@@ -40,19 +40,13 @@ namespace Checkers.Presentation.Views.Controller
                 CheckerBoard boardToMakeMoveOn = board;
                 do
                 {
-                    Logger.Debug("Board Before");
-                    Logger.Debug(boardToMakeMoveOn.ToString());
-
                     boardToMakeMoveOn = (CheckerBoard)boardToMakeMoveOn.GetMinimaxClone();
                     boardToMakeMoveOn.MakeMoveOnBoard((CheckersMove)moveToMake.GetMinimaxClone());
                     moveToMake = moveToMake.NextMove;
-
-                    Logger.Debug("Board After");
-                    Logger.Debug(boardToMakeMoveOn.ToString());
                 }
                 while (moveToMake != null);
 
-                values.Add(Minimax(boardToMakeMoveOn, ConstantsSettings.DefaultDepth - 1, alpha, beta, false, board.CurrentPlayerTurn));
+                values.Add(Minimax(boardToMakeMoveOn, depth - 1, alpha, beta, false, board.CurrentPlayerTurn, difficulty));
             }
 
             int maxHeuristics = int.MinValue;
@@ -79,13 +73,13 @@ namespace Checkers.Presentation.Views.Controller
             return bestMoves[Rng.Next(bestMoves.Count)];
         }
 
-        private static int Minimax(CheckerBoard board, int depth, int alpha, int beta, bool isMax, PlayerColor rootPlayer)
+        private static int Minimax(CheckerBoard board, int depth, int alpha, int beta, bool isMax, PlayerColor rootPlayer, string difficulty)
         {
             List<CheckersMove> possibleMoves = board.GetMovesForPlayer();
 
             if (depth == 0 || possibleMoves.Count == 0)
             {
-                return Score(board, rootPlayer);
+                return Score(board, rootPlayer, difficulty);
             }
 
             int value = 0;
@@ -103,7 +97,7 @@ namespace Checkers.Presentation.Views.Controller
                         moveToMake = moveToMake.NextMove;
                     }
                     while (moveToMake != null);
-                    int result = Minimax(boardToMakeMoveOn, depth - 1, alpha, beta, false, rootPlayer);
+                    int result = Minimax(boardToMakeMoveOn, depth - 1, alpha, beta, false, rootPlayer, difficulty);
 
                     value = Math.Max(result, value);
                     alpha = Math.Max(alpha, value);
@@ -130,7 +124,7 @@ namespace Checkers.Presentation.Views.Controller
                     }
                     while (moveToMake != null);
 
-                    int result = Minimax(boardToMakeMoveOn, depth - 1, alpha, beta, true, rootPlayer);
+                    int result = Minimax(boardToMakeMoveOn, depth - 1, alpha, beta, true, rootPlayer, difficulty);
 
                     value = Math.Min(result, value);
                     beta = Math.Min(alpha, value);
@@ -146,13 +140,13 @@ namespace Checkers.Presentation.Views.Controller
             return value;
         }
 
-        private static int Score(CheckerBoard board, PlayerColor rootPlayer)
+        private static int Score(CheckerBoard board, PlayerColor rootPlayer, string difficulty)
         {
             int score = board.ScoreWin(rootPlayer);
 
             if (score == 0)
             {
-                switch (ConstantsSettings.Difficulty.ToLower())
+                switch (difficulty.ToLower())
                 {
                     case "hard":
                         score += board.ScoreC(rootPlayer);

@@ -54,7 +54,7 @@ namespace Checkers.Presentation.Views
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Error Updating Square Row: Message = {0}", ex.Message));
+                    MessageBox.Show($"Erro ao criar as peças no tabuleiro: {ex.Message}");
                     return;
                 }
             } else

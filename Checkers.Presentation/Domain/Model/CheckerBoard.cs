@@ -309,20 +309,8 @@ namespace Checkers.Presentation.Domain.Model
 
             return score;
         }
-        public void SwapTurns()
-        {
-            switch(CurrentPlayerTurn)
-            {
-                case PlayerColor.Red:
-                    CurrentPlayerTurn = PlayerColor.Black;
-                    break;
-                case PlayerColor.Black:
-                    CurrentPlayerTurn = PlayerColor.Red;
-                    break;
-                default:
-                    break;
-            }
-        }
+        public void SwapTurns() => CurrentPlayerTurn = CurrentPlayerTurn == PlayerColor.Red ? PlayerColor.Black : PlayerColor.Red;
+        
         public List<CheckersMove> GetMovesForPlayer()
         {
             List<CheckersPoint> playersPoints = null;
@@ -337,7 +325,7 @@ namespace Checkers.Presentation.Domain.Model
             }
             else
             {
-                throw new ArgumentException("Unknown Player Color");
+                throw new ArgumentException("Peça desconhecida.");
             }
 
             List<CheckersMove> allAvailableMoves = new List<CheckersMove>();

@@ -52,9 +52,9 @@
                 <MenuItem Header="_Sair" Click="ExitGame"/>
             </MenuItem>
             <MenuItem Header="_Dificuldade">
-                <MenuItem Header="Fácil" Click="RestartGame" />
-                <MenuItem Header="Médio" Click="RestartGame" />
-                <MenuItem Header="Difícil" Click="RestartGame" />
+                <MenuItem Header="Fácil" Click="DificuldadeFacil" />
+                <MenuItem Header="Médio" Click="DificuldadeMedio" />
+                <MenuItem Header="Difícil" Click="DificuldadeDificil" />
             </MenuItem>
         </Menu>
         <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Margin="0,20,0,0"/>

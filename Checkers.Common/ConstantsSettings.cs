@@ -8,13 +8,11 @@ namespace Checkers.Common
     {
         public const int KingWorth = 32;
         public const int PawnWorth = 13;
-        public const int DefaultDepth = 2;
         public const int PawnDangerValue = 1;
         public const int KingDangerValue = 16;
         public const bool IsAiGame = true;
         public const bool IsAiDuel = false;
-        public const string Difficulty = "easy";
-        public const string WhosFirst = "white";
+        public const string WhosFirst = "red";
         public static TimeSpan TimeToSleepBetweenMoves = TimeSpan.FromSeconds(1000.0);
         public const bool RunningGeneticAlgo = false;
         public const int NumberOfSimulations = 30;

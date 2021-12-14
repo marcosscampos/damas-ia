@@ -40,6 +40,11 @@ namespace Checkers.Presentation
 
         private List<CheckersMove> currentAvailableMoves;
 
+        #region Default configuration
+        public string Difficulty { get; set; } = "hard";
+        public int Depth { get; set; } = 8;
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
@@ -71,15 +76,17 @@ namespace Checkers.Presentation
 
         private void InitializeCheckers()
         {
+
             this.Dispatcher.Invoke(() =>
             {
                 checkerBoard = new CheckerBoard();
                 checkerBoard.MakeBoard(new RoutedEventHandler(Button_Click));
+                string currentTurn = checkerBoard.CurrentPlayerTurn == PlayerColor.Red ? "Vermelha" : "Preta";
 
                 lst.ItemsSource = checkerBoard.BoardArray;
 
                 currentMove = null;
-                SetTitle(string.Format("Checkers! {0}'s turn!", checkerBoard.CurrentPlayerTurn));
+                SetTitle(string.Format("Jogo de Damas | Turno da Peça {0}", currentTurn));
 
                 DisableAllButtons();
                 EnableButtonsWithMove();
@@ -92,7 +99,6 @@ namespace Checkers.Presentation
             while (roundNumber < ConstantsSettings.NumberOfRounds)
             {
                 DoGeneticAlgo();
-                Logger.Info("Finished Round Number: " + roundNumber++);
             }
 
             GeneticProgress.GetGeneticProgressInstance().Delete();
@@ -112,7 +118,7 @@ namespace Checkers.Presentation
                 }
                 catch (AIException ex)
                 {
-                    Logger.Error("AI Exception was caught: " + ex.Message);
+                    Logger.Error("Erro de AI: " + ex.Message);
                     InitializeCheckers();
                     continue;
                 }
@@ -124,7 +130,7 @@ namespace Checkers.Presentation
                     currentProgress.NumberOfRandomGenomeWins++;
                 }
 
-                Logger.Info("AI Game Finished, Winner was " + winner);
+                Logger.Info("Jogo somente AI finalizado, o ganhador é: " + winner);
                 Logger.Info(string.Format(
                     "Current Stats -- NumberOfGamesPlayed: {0}, NumberOfRandomGenomeWins {1}",
                     currentProgress.NumberOfGames,
@@ -149,7 +155,7 @@ namespace Checkers.Presentation
             while (checkerBoard.GetWinner() == null)
             {
                 //AI vs AI
-                CheckersMove aiMove = AiController.MinimaxStart(checkerBoard);
+                CheckersMove aiMove = AiController.MinimaxStart(checkerBoard, Depth, Difficulty);
                 if (aiMove != null && numberOfTurns++ < MaxTurns)
                 {
                     while (aiMove != null)
@@ -201,7 +207,7 @@ namespace Checkers.Presentation
                     DisableAllButtons();
 
                     //AI needs to make a move now
-                    CheckersMove aiMove = AiController.MinimaxStart(checkerBoard);
+                    CheckersMove aiMove = AiController.MinimaxStart(checkerBoard, Depth, Difficulty);
                     if (aiMove != null)
                     {
                         while (aiMove != null)
@@ -253,12 +259,14 @@ namespace Checkers.Presentation
                 object winner = checkerBoard.GetWinner();
                 if (winner != null && winner is PlayerColor winnerColor && !ConstantsSettings.RunningGeneticAlgo)
                 {
-                    MessageBox.Show("Winner Winner Chicken Dinner: " + winnerColor);
+                    string newWinner = winnerColor == PlayerColor.Red ? "Vermelho" : "Preto";
+                    MessageBox.Show($"{newWinner} é o ganhador!!");
                 }
             }
+            string currentTurn = checkerBoard.CurrentPlayerTurn == PlayerColor.Red ? "Vermelha" : "Preta";
 
             ColorBackgroundOfPoints(currentAvailableMoves, Brushes.Black);
-            SetTitle(string.Format("Checkers! {0}'s turn!", checkerBoard.CurrentPlayerTurn));
+            SetTitle(string.Format($"Jogo de Damas | Turno da Peça {currentTurn}"));
             EnableButtonsWithMove();
             currentMove = null;
 
@@ -270,18 +278,16 @@ namespace Checkers.Presentation
         }
 
         private void SetBackgroundColor(UserControl control, Brush colorToSet)
-        {
-            Application.Current.Dispatcher.BeginInvoke(
+        => Application.Current.Dispatcher.BeginInvoke(
                       DispatcherPriority.Background,
                       new Action(() => control.Background = colorToSet));
-        }
+        
 
         private void SetTitle(string titleToSet)
-        {
-            Application.Current.Dispatcher.BeginInvoke(
+        => Application.Current.Dispatcher.BeginInvoke(
                       DispatcherPriority.Background,
                       new Action(() => this.Title = titleToSet));
-        }
+        
 
         private void EnableButtonsWithMove()
         {
@@ -386,6 +392,42 @@ namespace Checkers.Presentation
         private void ExitGame(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void DificuldadeFacil(object sender, RoutedEventArgs e) 
+        {
+            if (aiThread != null)
+            {
+                aiThread.Abort();
+            }
+
+            this.Difficulty = "easy";
+            this.Depth = 2;
+            InitializeCheckers();
+        }
+
+        private void DificuldadeMedio(object sender, RoutedEventArgs e) 
+        {
+            if (aiThread != null)
+            {
+                aiThread.Abort();
+            }
+
+            this.Difficulty = "medium";
+            this.Depth = 4;
+            InitializeCheckers();
+        }
+
+        private void DificuldadeDificil(object sender, RoutedEventArgs e) 
+        {
+            if (aiThread != null)
+            {
+                aiThread.Abort();
+            }
+
+            this.Difficulty = "hard";
+            this.Depth = 8;
+            InitializeCheckers();
         }
     }
 }
