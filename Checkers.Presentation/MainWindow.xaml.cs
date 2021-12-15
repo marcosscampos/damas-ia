@@ -167,7 +167,7 @@ namespace Checkers.Presentation
                 }
                 else
                 {
-                    throw new AIException("IA não encontrou possíveis jogadas.");
+                    throw new AIException("The AI could not find any valid moves or the AI are just going back and forth, This must have ended in a tie");
                 }
             }
         }
@@ -259,16 +259,8 @@ namespace Checkers.Presentation
                 object winner = checkerBoard.GetWinner();
                 if (winner != null && winner is PlayerColor winnerColor && !ConstantsSettings.RunningGeneticAlgo)
                 {
-                    string newWinner = winnerColor == PlayerColor.Red ? "Vermelha" : "Preta";
-                    MessageBox.Show($"Peça {newWinner} é a ganhadora!!");
-
-                    var  dialog = MessageBox.Show("Jogar de novo? Padrão de Dificiuldade: Médio", "Reiniciar jogo", MessageBoxButton.YesNo);
-
-
-                    if (dialog == MessageBoxResult.Yes)
-                        this.ReiniciarJogo();
-                    else
-                        Environment.Exit(0);
+                    string newWinner = winnerColor == PlayerColor.Red ? "Vermelho" : "Preto";
+                    MessageBox.Show($"{newWinner} é o ganhador!!");
                 }
             }
             string currentTurn = checkerBoard.CurrentPlayerTurn == PlayerColor.Red ? "Vermelha" : "Preta";
@@ -435,18 +427,6 @@ namespace Checkers.Presentation
 
             this.Difficulty = "hard";
             this.Depth = 8;
-            InitializeCheckers();
-        }
-
-        private void ReiniciarJogo()
-        {
-            if (aiThread != null)
-            {
-                aiThread.Abort();
-            }
-
-            this.Difficulty = "medium";
-            this.Depth = 4;
             InitializeCheckers();
         }
     }
