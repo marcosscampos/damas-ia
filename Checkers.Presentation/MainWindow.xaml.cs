@@ -41,8 +41,8 @@ namespace Checkers.Presentation
         private List<CheckersMove> currentAvailableMoves;
 
         #region Default configuration
-        public string Difficulty { get; set; } = "hard";
-        public int Depth { get; set; } = 8;
+        public string Difficulty { get; set; } = "medium";
+        public int Depth { get; set; } = 4;
         #endregion
 
         /// <summary>
@@ -86,7 +86,24 @@ namespace Checkers.Presentation
                 lst.ItemsSource = checkerBoard.BoardArray;
 
                 currentMove = null;
-                SetTitle(string.Format("Jogo de Damas | Turno da Peça {0}", currentTurn));
+                var dificuldade = "";
+
+                switch(Difficulty)
+                {
+                    case "hard":
+                        dificuldade = "Difícil";
+                        break;
+                    case "medium":
+                        dificuldade = "Médio";
+                        break;
+                    case "easy":
+                        dificuldade = "Fácil";
+                        break;
+                    default:
+                        break;
+                }
+
+                SetTitle($"Jogo de Damas | Turno da Peça {currentTurn} | Dificuldade: {dificuldade}");
 
                 DisableAllButtons();
                 EnableButtonsWithMove();
@@ -274,7 +291,25 @@ namespace Checkers.Presentation
             string currentTurn = checkerBoard.CurrentPlayerTurn == PlayerColor.Red ? "Vermelha" : "Preta";
 
             ColorBackgroundOfPoints(currentAvailableMoves, Brushes.Black);
-            SetTitle(string.Format($"Jogo de Damas | Turno da Peça {currentTurn}"));
+
+            var dificuldade = "";
+
+            switch (Difficulty)
+            {
+                case "hard":
+                    dificuldade = "Difícil";
+                    break;
+                case "medium":
+                    dificuldade = "Médio";
+                    break;
+                case "easy":
+                    dificuldade = "Fácil";
+                    break;
+                default:
+                    break;
+            }
+
+            SetTitle($"Jogo de Damas | Turno da Peça {currentTurn} | Dificuldade: {dificuldade}");
             EnableButtonsWithMove();
             currentMove = null;
 
